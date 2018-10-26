@@ -22,7 +22,7 @@ app.get("/", function(req, res){
 });
 
 //##################### MANAGE Route############################
-app.get("/manage", function(req, res){
+app.get("/products/manage", function(req, res){
     //get campgrounds in database
     Product.find({},function(err, allProducts){
         if(err){
@@ -33,7 +33,7 @@ app.get("/manage", function(req, res){
      });
 });
 
-app.get("/manage/:id", function(req, res){
+app.get("/products/manage/:id", function(req, res){
     Product.findById(req.params.id, function(err, foundProduct){
         if(err){
             res.redirect("/")
@@ -43,7 +43,7 @@ app.get("/manage/:id", function(req, res){
         }
     });
 })
-app.delete("/delete/:id", function(req, res){
+app.delete("/products/manage/:id", function(req, res){
     Product.findByIdAndRemove(req.params.id, function(err){
         if(err){
             res.redirect("/")
@@ -53,7 +53,7 @@ app.delete("/delete/:id", function(req, res){
     })
 });
 
-app.put("/manage/:id", function(req, res){
+app.put("/products/manage/:id", function(req, res){
     //find and update correct product
     Product.findByIdAndUpdate(req.params.id, req.body.products, 
             function(err ,updatedProduct){
@@ -80,11 +80,11 @@ app.get("/products/", function(req, res){
 });
 
 //ADD
-app.get("/add", function(req, res){
+app.get("/products/add", function(req, res){
     res.render('add')
 });
 
-app.post("/add", function(req, res){
+app.post("/products/add", function(req, res){
     //get data from a form and add to campgrounds array
     var name = req.body.name;
     var image = req.body.image;
@@ -98,7 +98,7 @@ app.post("/add", function(req, res){
       }else{
           // redirect to index page.
             console.log(newProduct)
-           res.redirect("/");
+           res.redirect("/products");
       }
    });
 });
@@ -128,7 +128,7 @@ app.put("/products/buy/:id", function(req, res){
                         res.redirect("/");
                     }else{
                         console.log(updatedProduct)
-                        res.redirect("/products/buy/" + req.params.id);
+                        res.redirect("/products");
                     }
             });
         } 
