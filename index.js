@@ -44,7 +44,6 @@ app.get("/products/buy/:id", function(req, res){
             console.log(err)
         }else{
            res.render("buy", {products: foundProduct});
-           console.log(foundProduct)
         }
     });
 });

@@ -1,11 +1,19 @@
-var buyBtn = document.getElementById("buyBtn");
-var qtyText = document.getElementById("qtyText").textContent;
-var totalQty = document.getElementById("totalQty").textContent;
 
-var qty = parseInt(qtyText, 10);
-var total = parseInt(totalQty, 10);
+
+var buyBtn = document.querySelector("#buyBtn");
+var qtyText = document.querySelector("#qtyText");
+var totalQty = document.querySelector("#totalQty");
+var remainingLabel = document.querySelector("#remaining");
+
+
+var total = 0;
+var ans = 0;
+var remaining = 0;
+var qty = 0;
 
 buyBtn.addEventListener("click", function(){
-var remainingQty = total - qty;
-console.log(remainingQty);
-});
+    var qty = parseInt(document.getElementById('qtyText').value);
+    var total = +document.getElementById('totalQty').innerText;
+    var remain = total - qty;
+    remainingLabel.textContent = remain;
+})
