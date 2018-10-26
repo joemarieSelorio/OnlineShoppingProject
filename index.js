@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var Product = require('./models/product');
 const productRouter = require('./server/productRouter');
 const manageRouter = require('./server/manageRouter');
-const buyRouter = require('./server/buyRouter');
+const buyRouters = require('./server/buyRouter');
 var port = 3300;
 app.set("view engine", "ejs");
 
@@ -25,7 +25,7 @@ app.get("/", function(req, res){
 
 app.use('/', productRouter);
 app.use('/', manageRouter);
-app.use('/', buyRouter);
+app.use('/', buyRouters);
 
 app.listen(port, ()=>{
     console.log(`this app listens on port ${port}`);
