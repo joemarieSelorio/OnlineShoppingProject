@@ -110,9 +110,6 @@ app.put("products/:id", function(req, res){
         });
 });
 
-
-
-
 //#####################DELETE Route############################
 app.delete("products/:id", function(req, res){
     Product.findByIdAndRemove(req.params.id, function(err){
