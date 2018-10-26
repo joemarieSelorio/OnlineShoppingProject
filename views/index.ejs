@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>DueceBag</title>
+</head>
+<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="/index.css">
+<body>
+        <nav class = "navbar navbar-default">
+                <div class = "container-fluid">
+                    <div class = "navbar-header">
+                        <a class = "navbar-brand" href ="/">DueceBag</a>
+                    </div>
+                    <div class = "collapse navbar-collapse">
+                        <ul class = " nav navbar-nav navbar-right">
+                                <li><a href = "/login" >Login</a></li>
+                                <li><a href = "/register" >Sign up</a></li>
+                                 <li><a href = "#" ></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <div class = "container">
+                <header class = "jumbotron">
+                    <div class = "container">
+                        <h1>Welcome to DueceBag</h1>
+                        <p>Bags? Yep we have it!</p>
+                        <p>
+                            
+                        </p>
+                    </div>
+                </header>
+                <div class = "row text-center"  style = "display:flex; flex-wrap: wrap;">
+                    <!--iterate all campground elements in array and displays it-->
+                    <% products.forEach(function(product){ %>
+                        <div class = "col-md-3 col-sm-6" >
+                            <div class = "thumbnail" >
+                                <img src  = "<%= product.image %>">
+                                <div class = "caption">
+                                     <h4> Name: <%= product.name %> </h4>
+                                </div>
+                                <div class = "caption">
+                                        <h4> Price: Php <%= product.price %> </h4>
+                                </div>
+                                <div class = "caption">
+                                        <h4> Quantity: <%= product.quantity %> </h4>
+                                </div>
+                                <p>
+                                        <a href = "/products/buy/<%= product._id %>" class = "btn btn-md btn-primary">Buy</a>
+                                </p>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+        </div>    
+</body>
+</html>
+
