@@ -22,7 +22,16 @@
                 </div>
 
                 <div class = "caption">
-                        <input id = "quantity" type = "number">
+                    <select id = "quantity">
+                       <%
+                        var qty = products.quantity;
+                        for(var i = 1; i <= qty; i++){
+                            %><option value = "<%= i%>"><%= i%></option><%
+                        }
+                       %>
+                    </select>
+                    
+
                 </div>
                 <p>
                     <form action = "/products/buy/<%= products._id%>?_method=PUT" method = "POST">
