@@ -16,7 +16,6 @@
                     </div>
                     <div class = "collapse navbar-collapse">
                         <ul class = " nav navbar-nav navbar-right">
-                                <li><a href = "/products/manage" >Manage Products</a></li>
                                 <li><a href = "/register" >Sign up</a></li>
                                  <li><a href = "#" ></a></li>
                         </ul>
@@ -24,15 +23,7 @@
                 </div>
             </nav>
         <div class = "container">
-                <header class = "jumbotron">
-                    <div class = "container">
-                        <h1>Welcome to DueceBag</h1>
-                        <p>Bags? Yep we have it!</p>
-                        <p>
-                            
-                        </p>
-                    </div>
-                </header>
+               
                 <div class = "row text-center"  style = "display:flex; flex-wrap: wrap;">
                     <!--iterate all campground elements in array and displays it-->
                     <% products.forEach(function(product){ %>
@@ -49,7 +40,8 @@
                                         <h4> Quantity: <%= product.quantity %> </h4>
                                 </div>
                                 <p>
-                                        <a href = "/products/buy/<%= product._id %>" class = "btn btn-md btn-primary">Buy</a>
+                                    <a href = "products/edit/<%= product._id %>" class = "btn btn-md btn-primary">Edit</a>
+                                    <a href = "products/delete/<%= product._id %>" class = "btn btn-md btn-primary">Delete</a>
                                 </p>
                             </div>
                         </div>

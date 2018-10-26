@@ -48,18 +48,37 @@ app.get("/products/buy/:id", function(req, res){
     });
 });
 
-app.post("/products/buy/:id", function(req, res){
-     //find and update correct product
-     var quantity = req.body.quantity;
-     
-     Product.findByIdAndUpdate(req.params.id, req.body.products, 
-        function(err ,updatedProduct){
-            if(err){
-                res.redirect("/");
-            }else{
-                res.redirect("/");
-            }
-    });
+app.put("/products/buy/:id", function(req, res){
+    console.log(req.body);
+    Product.findById(req.params.id, function(err, foundProduct){
+        if(err){
+            res.redirect("/")
+            console.log(err)
+        }else{
+            foundProduct.quantity = Number(req.body.quantity);
+            Product.findByIdAndUpdate(req.params.id, foundProduct, 
+                function(err ,updatedProduct){
+                    if(err){
+                        res.redirect("/");
+                    }else{
+                        console.log(updatedProduct)
+                        res.redirect("/products/buy/" + req.params.id);
+                    }
+            });
+        } 
+    })
+});
+
+app.put("products/:id", function(req, res){
+    //find and update correct product
+    Product.findByIdAndUpdate(req.params.id, req.body.products, 
+            function(err ,updatedProduct){
+                if(err){
+                    res.redirect("/");
+                }else{
+                    res.redirect("/");
+                }
+        });
 });
 
 //CREATE
@@ -83,6 +102,17 @@ app.post("/products", function(req, res){
 });
 
 //#####################Edit Route############################
+app.get("/products/manage", function(req, res){
+    //get campgrounds in database
+    Product.find({},function(err, allProducts){
+        if(err){
+            console.log("Something went wrong retrieving campgrounds");
+        }else{
+            res.render("manage", {products: allProducts});
+        }
+     });
+});
+
 app.get("products/edit/:id", function(req, res){
     Product.findById(req.params.id, function(err, foundProduct){
         if(err){

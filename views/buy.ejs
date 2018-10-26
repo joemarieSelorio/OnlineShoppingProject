@@ -2,31 +2,49 @@
 <html>
 <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="/index.css">
+        
        
 </head>
 <body>
-  <div class = "product-sold">
-      <div class="row">
-          <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-              <img src="<%= products.image%>" alt="...">
-           <div class="caption">
-                <h3><strong><%= products.name%><strong></h3>
-                  <label id = "remaining"></label>
-                  <label id = "totalQty"><%= products.quantity%></label>
-                  <input id = "qtyText" class = "form-control" type = "text" name ="products[quantity]" value = "<%= products.quantity %>" >
-                  <label ><%= products.quantity%></label>
-                        <button id = "buyBtn" class = "btn btn-primary" >Purchase</button>
-                <p>...</p>
+  <div class = "row text-center"  style = "display:flex; flex-wrap: wrap;">
+        <div class = "col-md-3 col-sm-6" >
+            <div class = "thumbnail" >
+               
+                <div class = "caption">
+                    <Label id = "totalLabel"> <%= products.quantity %> </label>
+                    
+                </div>
+                <div class = "caption">
+                     <h4> Name: <%= products.name %> </h4>
+                </div>
+                <div class = "caption">
+                        <h4> Price: Php <%= products.price %> </h4>
+                </div>
+
+                <div class = "caption">
+                        <input id = "quantity" type = "number">
+                </div>
                 <p>
+                    <form action = "/products/buy/<%= products._id%>?_method=PUT" method = "POST">
+                         <button id ="buyBtn" class = "btn btn-sm btn-primary btn-primary">Purchase</button>
+                         <input class = "form-control" type = "text" name ="products[name]" value = "<%= products.name %>"  >
+                            <input class = "form-control" type = "text" name ="products[image]" value = "<%= products.image %>" >    
+                            <input class = "form-control" type = "text" name ="products[price]" value = "<%= products.price %>" >
+                            <input id = "remainingtxt"  type = "text" name ="quantity" value = "<%= products.quantity%>">
+                    </form>
                 </p>
-      
-              </div>
             </div>
-          </div>
-        </div>
-  </div>
+    
+
+        <div id = "right" class = "container">
+         
+                <div style = "width: 30%; margin: 50px auto;">
+                            
+
+                </div>
+              </div>
+   
+</div>
   <script type="text/javascript" src="/buy.js"></script>
 </body>
 </html>
