@@ -16,7 +16,6 @@
                     </div>
                     <div class = "collapse navbar-collapse">
                         <ul class = " nav navbar-nav navbar-right">
-                                <li><a href = "/register" >Sign up</a></li>
                                  <li><a href = "#" ></a></li>
                         </ul>
                     </div>
@@ -40,8 +39,12 @@
                                         <h4> Quantity: <%= product.quantity %> </h4>
                                 </div>
                                 <p>
-                                    <a href = "products/edit/<%= product._id %>" class = "btn btn-md btn-primary">Edit</a>
-                                    <a href = "products/delete/<%= product._id %>" class = "btn btn-md btn-primary">Delete</a>
+                                
+                                    <a href = "/manage/<%= product._id%>" class = "btn btn-md btn-primary">Edit</a>
+
+                                    <form action = "/delete/<%= product._id%>?_method=DELETE" method = "POST">
+                                        <button id ="buyBtn" class = "btn btn-md btn-primary btn-primary">Delete</button>
+                                    </form>
                                 </p>
                             </div>
                         </div>

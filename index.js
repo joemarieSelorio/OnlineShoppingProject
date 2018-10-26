@@ -5,9 +5,6 @@ var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 var Product = require('./models/product');
 var port = 3300;
-
-
-
 app.set("view engine", "ejs");
 
 //incorporate stylesheet
@@ -24,7 +21,53 @@ app.get("/", function(req, res){
     res.render('landing')
 });
 
-//GET ROUTE
+//##################### MANAGE Route############################
+app.get("/manage", function(req, res){
+    //get campgrounds in database
+    Product.find({},function(err, allProducts){
+        if(err){
+            console.log("Something went wrong retrieving campgrounds");
+        }else{
+            res.render("manage", {products: allProducts});
+        }
+     });
+});
+
+app.get("/manage/:id", function(req, res){
+    Product.findById(req.params.id, function(err, foundProduct){
+        if(err){
+            res.redirect("/")
+        }else{
+           res.render("edit", {products: foundProduct});
+           console.log(foundProduct)
+        }
+    });
+})
+app.delete("/delete/:id", function(req, res){
+    Product.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.redirect("/")
+        }else{
+            res.redirect("/products");
+        }
+    })
+});
+
+app.put("/manage/:id", function(req, res){
+    //find and update correct product
+    Product.findByIdAndUpdate(req.params.id, req.body.products, 
+            function(err ,updatedProduct){
+                if(err){
+                    res.redirect("/");
+                }else{
+                    res.redirect("/products");
+                }
+        });
+});
+
+
+
+// PRODUCT
 app.get("/products/", function(req, res){
     //get campgrounds in database
     Product.find({},function(err, allProducts){
@@ -36,6 +79,29 @@ app.get("/products/", function(req, res){
      });
 });
 
+//ADD
+app.get("/add", function(req, res){
+    res.render('add')
+});
+
+app.post("/add", function(req, res){
+    //get data from a form and add to campgrounds array
+    var name = req.body.name;
+    var image = req.body.image;
+    var price = req.body.price;
+    var quantity = req.body.quantity;
+    var newProduct = {name: name, image: image, price: price, quantity: quantity};
+   //Create new Product and save to DB
+   Product.create(newProduct, function(err, product){
+      if(err){
+          console.log(err)
+      }else{
+          // redirect to index page.
+            console.log(newProduct)
+           res.redirect("/");
+      }
+   });
+});
 //buy route
 app.get("/products/buy/:id", function(req, res){
     Product.findById(req.params.id, function(err, foundProduct){
@@ -69,86 +135,6 @@ app.put("/products/buy/:id", function(req, res){
     })
 });
 
-app.put("products/:id", function(req, res){
-    //find and update correct product
-    Product.findByIdAndUpdate(req.params.id, req.body.products, 
-            function(err ,updatedProduct){
-                if(err){
-                    res.redirect("/");
-                }else{
-                    res.redirect("/");
-                }
-        });
-});
-
-//CREATE
-app.post("/products", function(req, res){
-    //get data from a form and add to campgrounds array
-    var name = req.body.name;
-    var image = req.body.image;
-    var price = req.body.price;
-    var quantity = req.body.quantity;
-    var newProduct = {name: name, image: image, price: price, quantity: quantity};
-   //Create new Product and save to DB
-   Product.create(newProduct, function(err, product){
-      if(err){
-          console.log(err)
-      }else{
-          // redirect to index page.
-            console.log(newProduct)
-           res.redirect("/");
-      }
-   });
-});
-
-//#####################Edit Route############################
-app.get("/products/manage", function(req, res){
-    //get campgrounds in database
-    Product.find({},function(err, allProducts){
-        if(err){
-            console.log("Something went wrong retrieving campgrounds");
-        }else{
-            res.render("manage", {products: allProducts});
-        }
-     });
-});
-
-app.get("products/edit/:id", function(req, res){
-    Product.findById(req.params.id, function(err, foundProduct){
-        if(err){
-            res.redirect("/")
-        }else{
-           res.render("edit", {products: foundProduct});
-           console.log(foundProduct)
-        }
-    });
-});
-
-
-
-//UPDATE PRODUCT ROUTE
-app.put("products/:id", function(req, res){
-    //find and update correct product
-    Product.findByIdAndUpdate(req.params.id, req.body.products, 
-            function(err ,updatedProduct){
-                if(err){
-                    res.redirect("/");
-                }else{
-                    res.redirect("/");
-                }
-        });
-});
-
-//#####################DELETE Route############################
-app.delete("products/:id", function(req, res){
-    Product.findByIdAndRemove(req.params.id, function(err){
-        if(err){
-            res.redirect("/")
-        }else{
-            res.redirect("/");
-        }
-    })
-});
 
 app.listen(port, ()=>{
     console.log(`this app listens on port ${port}`);
