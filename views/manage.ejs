@@ -21,6 +21,9 @@
                     </div>
                 </div>
             </nav>
+        <div class ="pageHdr">
+                    <h1>Manage Product</h1>
+        </div>
         <div class = "container">
                
                 <div class = "row text-center"  style = "display:flex; flex-wrap: wrap;">
@@ -41,6 +44,7 @@
                                 <p>
                                 
                                     <a href = "/products/manage/<%= product._id%>" class = "btn btn-md btn-primary">Edit</a>
+
                                     <form action = "/products/manage/<%= product._id%>?_method=DELETE" method = "POST">
                                         <button id ="buyBtn" class = "btn btn-md btn-primary btn-primary">Delete</button>
                                     </form>

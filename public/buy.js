@@ -9,6 +9,8 @@ var remain = 0;
 quantityTxt.addEventListener("click", function(){
     var qty = parseInt(document.getElementById('quantity').value);
     var total = +document.getElementById('totalLabel').innerText;
+    console.log(qty)
+    console.log(total)
     var remain = total - qty;
     document.getElementById("remainingtxt").value = remain
 })

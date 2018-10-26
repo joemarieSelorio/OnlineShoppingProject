@@ -2,44 +2,68 @@
 <html>
 <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="/index.css">
        
 </head>
 <body>
+
+  <nav class = "navbar navbar-default">
+                <div class = "container-fluid">
+                    <div class = "navbar-header">
+                        <a class = "navbar-brand" href ="/products">DueceBag</a>
+                    </div>
+                    <div class = "collapse navbar-collapse">
+                        <ul class = " nav navbar-nav navbar-right">
+                                <li><a href = "/products/add" >Add Product</a></li>
+                                <li><a href = "/products/manage" >Manage Products</a></li>
+                               
+                                 <li><a href = "#" ></a></li>
+                        </ul>
+                    </div>
+                </div>
+  </nav>
+  <div class ="pageHdr">
+    <h1>Buy Product</h1>
+  </div>
+
   <div class = "row text-center"  style = "display:flex; flex-wrap: wrap;">
-        <div class = "col-md-3 col-sm-6" >
+        <div id ="box" class = "col-md-3 col-sm-6" >
+
+            <table id="tblproduct">
+                <td>
+                        <img src  = "<%= products.image %>" height="250px" width="250px">
+                </td>
+                <td>
+                    <ul id="info">
+                        <li> <div class = "caption"><h4 ><Strong>Name:</Strong><label> <%= products.name %> </label></h4></div></li>
+                        <li><div class = "caption"><h4><Strong>Quantity Available:</Strong><label></label><Label id = "totalLabel"><%= products.quantity %> </label> </label></h4></div></li>
+                        <li> <div class = "caption"><h4><Strong>Price: </Strong><label></label><label>Php <%= products.price %></label> </h4></div></li>
+                        <li>  
+                            <div class = "select-style">
+                                    <select id = "quantity">
+                                            <%
+                                             var qty = products.quantity;
+                                             for(var i = 1; i <= qty; i++){
+                                                 %><option value = "<%= i%>"><%= i%></option><%
+                                             }
+                                            %>
+                                    </select>
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+            </table>
             <div class = "thumbnail" >
-               
-                <div class = "caption">
-                    <Label id = "totalLabel"> <%= products.quantity %> </label>
-                    
-                </div>
-                <div class = "caption">
-                     <h4> Name: <%= products.name %> </h4>
-                </div>
-                <div class = "caption">
-                        <h4> Price: Php <%= products.price %> </h4>
-                </div>
-
-                <div class = "caption">
-                    <select id = "quantity">
-                       <%
-                        var qty = products.quantity;
-                        for(var i = 1; i <= qty; i++){
-                            %><option value = "<%= i%>"><%= i%></option><%
-                        }
-                       %>
-                    </select>
-                    
-
-                </div>
                 <p>
                     <form action = "/products/buy/<%= products._id%>?_method=PUT" method = "POST">
-                         <button id ="buyBtn" class = "btn btn-sm btn-primary btn-primary">Purchase</button>
-                         <input class = "form-control" type = "text" name ="products[name]" value = "<%= products.name %>"  >
+                         <button id ="buyBtn" class = "btn btn-lg btn-primary btn-primary">Purchase</button>
+                         <div id="hidden">
+                            <input class = "form-control" type = "text" name ="products[name]" value = "<%= products.name %>"  >
                             <input class = "form-control" type = "text" name ="products[image]" value = "<%= products.image %>" >    
                             <input class = "form-control" type = "text" name ="products[price]" value = "<%= products.price %>" >
                             <input id = "remainingtxt"  type = "text" name ="quantity" value = "<%= products.quantity%>">
+
+                        </div>
                     </form>
                 </p>
             </div>
@@ -47,11 +71,11 @@
 
         <div id = "right" class = "container">
          
-                <div style = "width: 30%; margin: 50px auto;">
+                <div style = "width: 100%; margin: 50px auto;">
                             
 
                 </div>
-              </div>
+        </div>
    
 </div>
   <script type="text/javascript" src="/buy.js"></script>

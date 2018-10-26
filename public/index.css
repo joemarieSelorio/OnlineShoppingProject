@@ -5,7 +5,45 @@
 				 0px 8px 13px rgba(0,0,0,0.1),
 				 0px 18px 23px rgba(0,0,0,0.1);
 }
+#tblproduct{
+  margin-top: 1in;
+  margin: auto;
+  width: 50%;
+}
+.footer{
+ background: black;
+ color:white;
+ text-align: center;
+ list-style: none;
 
+}
+#info{
+ text-align: left;
+ list-style:none;
+
+}
+#box{
+ 
+  width: 100%;
+}
+
+#hidden{
+
+  visibility: hidden;
+}
+#members{
+  list-style: none;
+  font-size: 8 px;
+}
+.pageHdr{
+  height: 250 px;
+  width:100%;
+  background-color: #461F00;
+  color:white;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
 .thumbnail img {
   height:250px;
   width:200%;
@@ -18,10 +56,11 @@
 }
 
 .jumbotron {
- background-color: rgb(113, 255, 144);
+ background-color: #461F00;;
  position:relative;
   z-index: 2;
   box-shadow: 0 8px 16px -6px black;
+  color: white;
 }
 
 h1{
@@ -36,5 +75,15 @@ h1{
 }
 
 .right{
-  float: right
+ width: 100%;
+ background-color: blue;
 }
+
+.filler{
+  height: 100%;
+}
+
+select{
+  font-size: 20px;
+}
+
